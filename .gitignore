@@ -1,0 +1,3 @@
+# Ignore all files in user_data and label_data directories
+user_data/
+label_data/
