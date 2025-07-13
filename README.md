@@ -22,10 +22,9 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 ## Index
 
 - [Project Introduction](#project-introduction)
-- [Development Environment](#development-environment)
+- [Project Structure](#project-structure)
 - [Key Features](#key-features)
 - [Requirements](#requirements)
-- [Project Structure](#project-structure)
 - [Demo Video](#demo-video)
 
 ---
