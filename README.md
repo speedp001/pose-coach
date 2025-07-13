@@ -12,6 +12,7 @@
 운동 종류는 `Diagonal Arm Lift`를 기준으로 구현되었으며, 구조적으로는 타 운동으로의 확장이 가능합니다.
 
 ---
+<br></br>
 
 ## Paper
 AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm Lift Movements, submitted to [Conference Name]
@@ -28,6 +29,7 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 - [Demo Video](#demo-video)
 
 ---
+<br></br>
 
 ## Project Introduction
 
@@ -39,7 +41,7 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 
 20명을 대상으로 한 사용자 테스트 결과, 본 시스템은 실제로 자세 정확도 향상, 반복 수행 증가, 속도 조절 개선에 효과적인 것으로 나타났습니다. 이를 통해 Pose-Coach는 홈트레이닝, 재활 운동, 피트니스 교육 등 다양한 실생활 환경에서 유용한 스마트 코칭 솔루션으로 활용될 수 있습니다.
 
-```text
+```
 [User Video]
    ↓
 [Pose Estimation using ViTPose]
@@ -54,6 +56,9 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
    ↓
 [Feedback: Visualization + Scores]
 ```
+
+---
+<br></br>
 
 ## Project Structure
 
@@ -168,6 +173,7 @@ where r = T_label / T_user
 </table>
 
 ---
+<br></br>
 
 ## Requirements
 
@@ -195,9 +201,9 @@ pip install -v -e .
 >https://github.com/ViTAE-Transformer/ViTPose
 
 ---
+<br></br>
 
 ## Demo Video
 
 > YouTube Link  
 >https://youtu.be/Uw1KAmsxoRo
----
