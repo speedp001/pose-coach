@@ -57,7 +57,7 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 
 ## Project Structure
 
-[https://imgur.com/5mlFNf6](https://i.imgur.com/5mlFNf6.png)
+<img width="3259" height="2200" alt="image" src="https://github.com/user-attachments/assets/00cae637-2b28-4b85-9bbc-289acfcc72d3" />
 
 ---
 
