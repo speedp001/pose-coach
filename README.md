@@ -57,7 +57,7 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 
 ## Project Structure
 
-<img width="3259" height="2200" alt="image" src="https://github.com/user-attachments/assets/00cae637-2b28-4b85-9bbc-289acfcc72d3" />
+<img width="3259" height="2200" alt="Fig 1" src="https://github.com/user-attachments/assets/8a8d35e9-2805-4a50-817e-ed0165e2d29f" />
 
 ---
 
@@ -150,11 +150,16 @@ where r = T_label / T_user
 
 사용자 skeleton과 라벨 skeleton을 동일 위치에 나란히 표시하고, 오차가 큰 관절은 색상이나 크기로 강조하여 **직관적인 오류 인식**이 가능하도록 설계되었습니다.
 
-https://imgur.com/Gr99BN7 | https://imgur.com/9oy74gZ | https://imgur.com/wOcAJkB
+<img width="561" height="596" alt="Fig 2 (a)" src="https://github.com/user-attachments/assets/affe598a-e1e0-49c5-bfde-fb862907bfc2" /> | 
+![Fig 2 (b)](https://github.com/user-attachments/assets/e384e10f-94c1-45b6-9ec3-2ee62a02709d) | 
+<img width="561" height="596" alt="Fig 2 (c)" src="https://github.com/user-attachments/assets/6eef8c0e-139f-4620-b6ab-41ed87031d03" />
+
 
 이 방식은 전문 지식이 없는 사용자도 오류를 빠르게 인지하고 개선할 수 있게 하며, 실제 사용자 테스트에서도 **정확도 향상과 반복 수행 증가에 긍정적인 영향을 실제 User Test**를 통해 입증하였습니다.
 
-https://imgur.com/FYfKXlp | https://imgur.com/IZWrDFt | https://imgur.com/qLzEK5W
+<img width="995" height="981" alt="Fig 4 (a)" src="https://github.com/user-attachments/assets/a4a28a2e-418d-49c3-85aa-bb2c02344014" /> | 
+<img width="996" height="981" alt="Fig 4 (b)" src="https://github.com/user-attachments/assets/aef9518b-0859-4057-b885-00543a8a71cc" /> | 
+<img width="995" height="981" alt="Fig 4 (c)" src="https://github.com/user-attachments/assets/47fcce7d-a9a1-4b32-83fd-5ca1227cfcfa" />
 
 ---
 
