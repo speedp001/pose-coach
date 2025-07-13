@@ -25,7 +25,6 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 - [Key Features](#key-features)
 - [Requirements](#requirements)
 - [Project Structure](#project-structure)
-- [Contributor](#contributor)
 - [Demo Video](#demo-video)
 
 ---
@@ -56,33 +55,113 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 [Feedback: Visualization + Scores]
 ```
 
-## Key Features
+## Project Structure
 
-| No. | Feature | Description |
-|:---:|:--------|:------------|
-| 1 | Human Pose Estimation | ViTPose 모델을 사용하여 2D keypoints를 정확하게 추출합니다. |
-| 2 | Accuracy Evaluation | 사용자 자세를 분석하고 정확도를 점수화하여 사용자에게 제공합니다. |
-| 3 | Repetition Counting | 운동 횟수를 자동으로 카운트합니다. |
-| 4 | Speed Evaluation | 사용자의 운동 속도 조절을 도와줍니다. |
-| 5 | Visualizaton | 사용자의 운동 자세와 모범 운동 자세를 비교하여 시각화합니다. 틀린 관절의 각도와 위치를 시각화하여 피드백합니다. |
+Pose-Coach 실행 구조
+https://imgur.com/5mlFNf6
+
+---
 
 ## Key Features
 
-| No. | Feature | Description |
-|:---:|:--------|:------------|
-| 1 | **High-Precision Pose Estimation** | 사전학습된 ViTPose 모델을 사용하여 사용자 영상에서 17개의 2D keypoints를 정밀하게 추출합니다. 이는 이후 모든 분석의 기반이 됩니다. |
-| 2 | **Activity-based Bounding Box Normalization** | 사용자마다 체형, 카메라 거리, 프레임 내 위치가 다르므로 전체 keypoint 분포를 기반으로 [0,1] 범위로 정규화하여 일관된 자세 분석을 가능하게 합니다.<br>`x' = (x - xmin) / (xmax - xmin), y' = (y - ymin) / (ymax - ymin)` |
-| 3 | **Joint Angle Computation (Cosine Rule)** | 자세 평가를 위해 관절 각도를 코사인 법칙을 통해 계산합니다.<br>`θ = cos⁻¹((A−B)·(C−B) / (‖A−B‖‖C−B‖))`<br>이는 어깨, 팔꿈치, 무릎 등 주요 부위의 움직임을 수치화하는 데 사용됩니다. |
-| 4 | **Repetition Counting via Angle Transitions** | 팔 관절의 각도가 상향 → 하향 또는 그 반대로 전환되는 지점을 포착하여 반복 횟수를 계산합니다. <br>임계각도(`θ_up`, `θ_down`)와 최소 간격 조건(`Δt`)을 통해 중복 카운트를 방지합니다. |
-| 5 | **Speed Analysis by Relative Timing** | 기준 영상의 반복 속도(`T_label`)와 사용자 반복 시간(`T_user`)을 비교하여 속도 점수를 부여합니다. <br>비율 `r = T_label / T_user`에 따라 속도가 너무 느리거나 빠르면 감점됩니다.<br>`S(r) = { 2r (r≤0.5), 1 (0.5<r≤1.0), 2(1.5−r) (1.0<r≤1.5), 0 (r>1.5) }` |
-| 6 | **Accuracy Evaluation (RMSE of Keypoint & Angle)** | 라벨 영상과 사용자 프레임 간의 keypoint 및 angle의 Root Mean Square Error(RMSE)를 계산해 정확도를 정량화합니다.<br>`Accuracy = max(0, 1 - RMSE_avg)`,<br>여기서 `RMSE_avg = (RMSE_keypoint + RMSE_angle)/2` |
-| 7 | **Visual Feedback with Skeleton Overlay** | 오차가 큰 프레임에서 사용자 skeleton과 라벨 skeleton을 동시에 시각화하고, 오차가 큰 관절을 강조하여 **직관적인 피드백**을 제공합니다. |
+Pose-Coach는 단순한 keypoint 추출에 그치지 않고, 정확한 자세 평가와 반복 횟수 측정, 운동 속도 분석, 시각적 피드백까지 통합한 AI 기반 자세 분석 시스템입니다. 특히 기존 시스템과 달리 동작의 ‘정확성’, ‘일관성’, ‘속도’, ‘반복성’까지 포괄적으로 평가할 수 있으며, 영상 기반 자동 비교 알고리즘을 통해 개별 사용자 맞춤 피드백을 제공합니다.
+
+---
+
+### 1. High-Precision Pose Estimation  
+운동 자세 분석의 첫 단계는 **High-Precision Pose Estimation**입니다. 본 시스템은 사전학습된 ViTPose 모델을 사용하여 17개 관절의 2D keypoints를 프레임 단위로 정확히 추출합니다. ViTPose는 HRNet 대비 더 높은 해상도 처리 능력과 범용성으로, 다양한 촬영 조건에서도 일관된 keypoint 품질을 보장합니다.
+
+---
+
+### 2. Activity-based Bounding Box Normalization  
+사람마다 체형이 다르고 촬영 거리나 위치도 다양하기 때문에, 동일한 동작이라도 raw keypoint 값에는 큰 차이가 발생할 수 있습니다. 이를 해결하기 위해 본 시스템은 **Activity-based Bounding Box Normalization** 기법을 적용합니다.
+
+기존의 프레임별 bounding box와 달리, 한 세션 전체 프레임에서 관측된 keypoint들의 최소·최대 좌표 범위를 기준으로 정규화하여 운동 전후 위치 변화나 개개인 별 체형 차이에 강건합니다.
+
+```text
+x' = (x − xmin) / (xmax − xmin)  
+y' = (y − ymin) / (ymax − ymin)
+```
+
+이러한 정규화는 keypoint 기반 비교의 기준을 통일하고, 모든 후속 분석에서 체형 편차의 영향을 최소화합니다.
+
+---
+
+### 3. Joint Angle Computation (Cosine Rule)  
+정규화된 keypoint는 단순한 위치 정보에 그치지 않고, 관절 각도 측정을 통해 자세의 질을 정량적으로 평가하는 데 사용됩니다.  
+
+어깨–팔꿈치–손목, 엉덩이–무릎–발목 등 세 점을 활용해 관절의 내각을 계산하며, 이를 위해 **코사인 법칙(Cosine Rule)**을 적용합니다.
+
+```text
+θ = cos⁻¹ ( ((A−B)·(C−B)) / (‖A−B‖‖C−B‖) )
+```
+
+기존 시스템은 keypoint의 좌표 차이만으로 평가했으나, 본 시스템은 관절 회전각 자체를 정량화함으로써 운동의 "형태 정확도"를 더 세밀하게 측정합니다.
+
+---
+
+### 4. Angle-based Keyframe Matching  
+운동의 속도나 프레임 수가 사람마다 다르기 때문에 시간 기준 정렬은 오차를 유발합니다. 이를 해결하기 위해 본 시스템은 **Angle-based Keyframe Matching** 기법을 적용합니다.
+
+어깨 관절의 각도가 30°, 60°, 90°, 120° 등 특정 기준 각도에 도달하는 시점을 기준으로 사용자의 프레임과 라벨 프레임을 동기화합니다.  
+
+이 방식은 서로 다른 속도나 반복 수에서도 정확한 동작 구간 비교가 가능합니다.
+
+---
+
+### 5. Accuracy Evaluation (RMSE-based)  
+자세의 정확도는 keypoint 위치 및 joint angle 오차를 기반으로 계산합니다. 동기화된 프레임쌍마다 RMSE를 계산하고 이를 평균내어 정확도를 정량화합니다.
+
+```text
+RMSE_avg = (RMSE_keypoint + RMSE_angle) / 2  
+Accuracy = max(0, 1 - RMSE_avg)
+```
+
+정확도는 0~1 범위로 제공되며, 1에 가까울수록 정답 영상과의 유사도가 높음을 의미합니다.
+
+---
+
+### 6. Repetition Counting (Angle Transition Detection)  
+반복 횟수는 **관절 각도의 상승→하강 전이**를 기반으로 계산됩니다. 기존의 좌표 y값 상승/하강 기준 방식은 팔 각도가 굽혀지거나 회전이 있으면 오탐 가능성이 컸습니다.
+
+Pose-Coach는 팔꿈치 또는 어깨 각도의 상향(≥120°)과 하향(≤60°)을 기준으로 전이 구간을 탐지하며, 최소 시간 간격을 조건으로 중복 카운트를 방지합니다.
+
+이 방식은 **움직임 의미 기반 반복 분석**을 가능하게 하여 더 정밀한 반복 측정이 가능합니다.
+
+---
+
+### 7. Speed Evaluation (Relative Tempo Score)  
+운동 속도는 사용자의 반복 주기(`T_user`)와 기준 영상(`T_label`) 간의 시간 비율 `r`로 계산되며, 점수는 다음과 같은 piecewise 함수로 계산됩니다:
+
+```text
+S(r) = 
+  2r              , r ≤ 0.5  
+  1               , 0.5 < r ≤ 1.0  
+  2(1.5 − r)      , 1.0 < r ≤ 1.5  
+  0               , r > 1.5  
+where r = T_label / T_user
+```
+
+이 방식은 단순한 빠름/느림 판단을 넘어서 **운동 속도**를 점수화하며, 트레이닝이나 재활 시 적정 속도 유지 유도에 유용합니다.
+
+---
+
+### 8. Visual Feedback (Skeleton Overlay with Error Highlighting)  
+사용자가 정확하지 않은 자세를 수행했을 때 이를 쉽게 인지할 수 있도록, Pose-Coach는 **Skeleton Overlay 시각화**를 제공합니다.
+
+사용자 skeleton과 라벨 skeleton을 동일 위치에 나란히 표시하고, 오차가 큰 관절은 색상이나 크기로 강조하여 **직관적인 오류 인식**이 가능하도록 설계되었습니다.
+
+https://imgur.com/Gr99BN7 | https://imgur.com/9oy74gZ | https://imgur.com/wOcAJkB
+
+이 방식은 전문 지식이 없는 사용자도 오류를 빠르게 인지하고 개선할 수 있게 하며, 실제 사용자 테스트에서도 **정확도 향상과 반복 수행 증가에 긍정적인 영향을 실제 User Test**를 통해 입증하였습니다.
+
+https://imgur.com/FYfKXlp | https://imgur.com/IZWrDFt | https://imgur.com/qLzEK5W
 
 ---
 
 ## Requirements
 
-프로젝트를 실행하기 위해 다음 Python 라이브러리가 필요합니다:
+프로젝트를 실행하기 위한 필수 라이브러리
 ```bash
 pip install -r requirements.txt
 ```
@@ -102,10 +181,12 @@ cd ViTPose
 pip install -v -e .
 ```
 
-Pretrained Model 다운로드
+ViTPose GitHub 주소 및 Pretrained Model 다운 링크
 
 https://github.com/ViTAE-Transformer/ViTPose
 
 ---
 
-## Project Structure
+## Demo Video
+
+https://youtu.be/Uw1KAmsxoRo
