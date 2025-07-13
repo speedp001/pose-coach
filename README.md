@@ -10,14 +10,10 @@
 - **틀린 자세 시각화 피드백** (Visual Feedback of Incorrect Pose)
 
 운동 종류는 `Diagonal Arm Lift`를 기준으로 구현되었으며, 구조적으로는 타 운동으로의 확장이 가능합니다.
-
----
 <br></br>
 
 ## Paper
 AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm Lift Movements, submitted to [Conference Name]
-
----
 <br></br>
 
 ## Index
@@ -27,8 +23,6 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 - [Key Features](#key-features)
 - [Requirements](#requirements)
 - [Demo Video](#demo-video)
-
----
 <br></br>
 
 ## Project Introduction
@@ -56,15 +50,12 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
    ↓
 [Feedback: Visualization + Scores]
 ```
-
----
 <br></br>
 
 ## Project Structure
 
 <img width="3259" height="2200" alt="Fig 1" src="https://github.com/user-attachments/assets/8a8d35e9-2805-4a50-817e-ed0165e2d29f" />
-
----
+<br></br>
 
 ## Key Features
 
@@ -171,8 +162,6 @@ where r = T_label / T_user
     <td><img src="https://github.com/user-attachments/assets/47fcce7d-a9a1-4b32-83fd-5ca1227cfcfa" width="300"/></td>
   </tr>
 </table>
-
----
 <br></br>
 
 ## Requirements
@@ -199,8 +188,6 @@ pip install -v -e .
 
 >ViTPose GitHub 주소 및 Pretrained Model 다운 링크
 >https://github.com/ViTAE-Transformer/ViTPose
-
----
 <br></br>
 
 ## Demo Video
