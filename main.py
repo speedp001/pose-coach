@@ -7,8 +7,7 @@ from utils.draw_keypoints import visualize_skeleton # type: ignore
 user_name = input("English Name: ")
 side = input("Side(left/right): ")
 ViTPose_model = input("ViTPose model(small/base/large/huge): ")
-# ViTPose_model = "small"
-# print(f"Name: {user_name}, Side: {side}", f"ViTPose model: {ViTPose_model}")
+print(f"Name: {user_name}, Side: {side}", f"ViTPose model: {ViTPose_model}")
 
 ##### Model configuration paths
 CONFIG_FILE = f"./ViTPose/configs/body/2d_kpt_sview_rgb_img/topdown_heatmap/coco/ViTPose_{ViTPose_model}_coco_256x192.py"
@@ -30,15 +29,15 @@ USER_OUTPUT_VISUALIZED = f"./user_data/user_keypoints/{user_name}_visualization_
 # rotation_90_inplace(USER_INPUT_VIDEO)
 
 # ##### Visualize keypoints and save as a video
-# visualize_skeleton(USER_INPUT_VIDEO, USER_OUTPUT_VISUALIZED, USER_OUTPUT_JSON)
-# print(f"Keypoint visualization saved: {USER_OUTPUT_VISUALIZED}")
+visualize_skeleton(USER_INPUT_VIDEO, USER_OUTPUT_VISUALIZED, USER_OUTPUT_JSON)
+print(f"Keypoint visualization saved: {USER_OUTPUT_VISUALIZED}")
 
-# ##### Run pose estimation
-# # Label pose estimation
-# pose_extraction(CONFIG_FILE, CHECKPOINT_FILE, LABEL_INPUT_VIDEO, LABEL_OUTPUT_JSON, LABEL_OUTPUT_VIDEO, None)
+##### Run pose estimation
+# Label pose estimation
+pose_extraction(CONFIG_FILE, CHECKPOINT_FILE, LABEL_INPUT_VIDEO, LABEL_OUTPUT_JSON, LABEL_OUTPUT_VIDEO, None)
 
-# # User pose estimation
-# pose_extraction(CONFIG_FILE, CHECKPOINT_FILE, USER_INPUT_VIDEO, USER_OUTPUT_JSON, USER_OUTPUT_VIDEO, LABEL_OUTPUT_JSON)
+# User pose estimation
+pose_extraction(CONFIG_FILE, CHECKPOINT_FILE, USER_INPUT_VIDEO, USER_OUTPUT_JSON, USER_OUTPUT_VIDEO, LABEL_OUTPUT_JSON)
 
 ##### Run pose evaluation and feedback visualization
 keypoint_RMSE, angle_RMSE, accuracy_final_score = pose_evaluation(USER_OUTPUT_JSON, LABEL_OUTPUT_JSON, USER_OUTPUT_VIDEO, LABEL_OUTPUT_VIDEO)
@@ -48,5 +47,5 @@ user_count, label_count, speed_final_score = pose_counter(USER_OUTPUT_JSON, LABE
 
 print("Accuracy score: ", accuracy_final_score)
 print("User reps: ", user_count)
-# print("User reps: ", label_count)
+print("User reps: ", label_count)
 print("Speed score(Speed score: ", speed_final_score)
