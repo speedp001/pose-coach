@@ -57,8 +57,7 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 
 ## Project Structure
 
-Pose-Coach 실행 구조
-https://imgur.com/5mlFNf6
+[https://imgur.com/5mlFNf6](https://i.imgur.com/5mlFNf6.png)
 
 ---
 
