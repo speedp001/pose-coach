@@ -1,10 +1,18 @@
 # Pose-Coach
 
-> **Pose-Coach는 사용자의 운동 자세를 분석하여 사용자에게 운동 피드백을 제공하는 AI 기반 포즈 교정 코칭 프로그램입니다. 정확한 포즈 수행을 지원하고, 운동 효과를 극대화하는 것을 목표로 합니다.**
+> **Pose-Coach는 사용자의 운동 자세를 분석하고 피드백을 제공하는 AI 기반 자세 교정 시스템입니다.**
+>  
+> 본 시스템은 딥러닝 기반 Human Pose Estimation 모델(ViTPose)을 활용하여, 사용자의 운동 정확성, 반복 횟수, 속도 등을 평가하고 직관적인 시각 피드백을 제공합니다.
 
 ---
 
-## Index
+## Paper
+AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm Lift Movements, submitted to [Conference Name]
+
+---
+
+## 📂 Index
+
 - [Project Introduction](#project-introduction)
 - [Development Environment](#development-environment)
 - [Key Features](#key-features)
@@ -15,7 +23,6 @@
   - [3. mmcv-full 설치 예시](#3-mmcv-full-설치-예시)
 - [Project Structure](#project-structure)
 - [Reference Models](#reference-models)
-  - [ViTPose 모델](#vitpose-모델)
 - [Contributor](#contributor)
 - [Demo Video](#demo-video)
 
@@ -23,20 +30,31 @@
 
 ## Project Introduction
 
-Pose-Coach는 Human Pose Estimation 기술을 활용하여 사용자의 운동 자세를 분석하고 실시간으로 피드백을 제공하는 시스템입니다.  
-운동 효과를 극대화하고, 잘못된 자세를 교정할 수 있도록 돕습니다.
+Pose-Coach는 사용자가 촬영한 운동 영상을 기반으로 **정확한 자세 평가와 피드백**을 제공하는 시스템입니다.  
+특히, 기존의 포즈 분석 시스템들이 단순한 정확도 측정에 그친 반면, Pose-Coach는 다음과 같은 요소들을 통합적으로 제공합니다:
 
----
+- **정확도 평가** (Keypoint, Joint Angle RMSE)
+- **운동 반복 횟수 계산** (Repetition Count)
+- **운동 속도 평가** (Speed Score)
+- **틀린 자세 시각화 피드백** (Visual Feedback of Incorrect Pose)
 
-## Development Environment
+운동 종류는 `Diagonal Arm Lift`를 기준으로 구현되었으며, 구조적으로는 타 운동으로의 확장이 가능합니다.
 
-- Python 3.8+
-- PyTorch 2.0.1
-- mmcv-full 1.3.9
-- opencv-python 4.11.0.86
-- ViTPose Pretrained Models
-
----
+```text
+[User Video]
+   ↓
+[Pose Estimation using ViTPose]
+   ↓
+[Activity-based BBox Normalization]
+   ↓
+[Keypoint & Angle Extraction]
+   ↓
+[Pose Matching with Labeled Video]
+   ↓
+[Evaluation: Accuracy, Speed, Repetition]
+   ↓
+[Feedback: Visualization + Scores]
+```
 
 ## Key Features
 
