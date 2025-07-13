@@ -185,13 +185,11 @@ cd ViTPose
 pip install -v -e .
 ```
 
-ViTPose GitHub 주소 및 Pretrained Model 다운 링크
+>ViTPose GitHub 주소 및 Pretrained Model 다운 링크
 
 https://github.com/ViTAE-Transformer/ViTPose
 
 ---
-
-## Demo Video
 
 ## Demo Video
 
