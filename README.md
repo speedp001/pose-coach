@@ -66,6 +66,18 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 | 4 | Speed Evaluation | 사용자의 운동 속도 조절을 도와줍니다. |
 | 5 | Visualizaton | 사용자의 운동 자세와 모범 운동 자세를 비교하여 시각화합니다. 틀린 관절의 각도와 위치를 시각화하여 피드백합니다. |
 
+## Key Features
+
+| No. | Feature | Description |
+|:---:|:--------|:------------|
+| 1 | **High-Precision Pose Estimation** | 사전학습된 ViTPose 모델을 사용하여 사용자 영상에서 17개의 2D keypoints를 정밀하게 추출합니다. 이는 이후 모든 분석의 기반이 됩니다. |
+| 2 | **Activity-based Bounding Box Normalization** | 사용자마다 체형, 카메라 거리, 프레임 내 위치가 다르므로 전체 keypoint 분포를 기반으로 [0,1] 범위로 정규화하여 일관된 자세 분석을 가능하게 합니다.<br>`x' = (x - xmin) / (xmax - xmin), y' = (y - ymin) / (ymax - ymin)` |
+| 3 | **Joint Angle Computation (Cosine Rule)** | 자세 평가를 위해 관절 각도를 코사인 법칙을 통해 계산합니다.<br>`θ = cos⁻¹((A−B)·(C−B) / (‖A−B‖‖C−B‖))`<br>이는 어깨, 팔꿈치, 무릎 등 주요 부위의 움직임을 수치화하는 데 사용됩니다. |
+| 4 | **Repetition Counting via Angle Transitions** | 팔 관절의 각도가 상향 → 하향 또는 그 반대로 전환되는 지점을 포착하여 반복 횟수를 계산합니다. <br>임계각도(`θ_up`, `θ_down`)와 최소 간격 조건(`Δt`)을 통해 중복 카운트를 방지합니다. |
+| 5 | **Speed Analysis by Relative Timing** | 기준 영상의 반복 속도(`T_label`)와 사용자 반복 시간(`T_user`)을 비교하여 속도 점수를 부여합니다. <br>비율 `r = T_label / T_user`에 따라 속도가 너무 느리거나 빠르면 감점됩니다.<br>`S(r) = { 2r (r≤0.5), 1 (0.5<r≤1.0), 2(1.5−r) (1.0<r≤1.5), 0 (r>1.5) }` |
+| 6 | **Accuracy Evaluation (RMSE of Keypoint & Angle)** | 라벨 영상과 사용자 프레임 간의 keypoint 및 angle의 Root Mean Square Error(RMSE)를 계산해 정확도를 정량화합니다.<br>`Accuracy = max(0, 1 - RMSE_avg)`,<br>여기서 `RMSE_avg = (RMSE_keypoint + RMSE_angle)/2` |
+| 7 | **Visual Feedback with Skeleton Overlay** | 오차가 큰 프레임에서 사용자 skeleton과 라벨 skeleton을 동시에 시각화하고, 오차가 큰 관절을 강조하여 **직관적인 피드백**을 제공합니다. |
+
 ---
 
 ## Requirements
@@ -91,6 +103,7 @@ pip install -v -e .
 ```
 
 Pretrained Model 다운로드
+
 https://github.com/ViTAE-Transformer/ViTPose
 
 ---
