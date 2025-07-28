@@ -53,8 +53,6 @@ In user tests with 20 participants, the system effectively improved posture accu
 <br></br>
 
 ## Project Structure
-
-<img width="3259" height="2200" alt="Fig 1" src="https://github.com/user-attachments/assets/8a8d35e9-2805-4a50-817e-ed0165e2d29f" />
 <img width="5324" height="1884" alt="Fig 1" src="https://github.com/user-attachments/assets/b14cef0b-9e90-4665-b095-7657d583810a" />
 <br></br>
 
