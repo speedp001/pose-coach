@@ -21,7 +21,8 @@ AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm 
 
 - [Project Introduction](#project-introduction)  
 - [Project Structure](#project-structure)  
-- [Key Features](#key-features)  
+- [Key Features](#key-features)
+- [User Test](#user-test)
 - [Requirements](#requirements)  
 - [Demo Video](#demo-video)  
 <br></br>
@@ -160,6 +161,33 @@ This method allows even users without specialized knowledge to quickly recognize
 </table>
 <br></br>
 
+## User Test
+<img width="2489" height="1141" alt="Fig 3" src="https://github.com/user-attachments/assets/34016a71-a9c7-409d-b004-9106b35cf44d" />
+The user study consisted of six sequential stages: initial instruction with a tutorial video, a pre-test without feedback, corrective feedback delivery, a post-test with feedback, additional refinement feedback, and a final questionnaire assessing feedback clarity, intuitiveness, and user satisfaction.
+
+### Table 1. Effectiveness of AI-based feedback on exercise performance.
+The results below show a statistically significant improvement in accuracy, speed, and repetition count after receiving feedback from the proposed system.  
+Especially, the Δ Score and t-values confirm meaningful enhancements in all metrics.
+
+| Measure            | Δ Score ↑ | t-value ↑ | p-value ↓ |
+|--------------------|-----------|-----------|------------|
+| Accuracy (Left, %) | +8.62%    | 4.51      | 0.00024     |
+| Accuracy (Right, %)| +8.05%    | 3.15      | 0.00525     |
+| Speed (Left, %)    | +18.63%   | 3.93      | 0.00089     |
+| Speed (Right, %)   | +23.51%   | 4.38      | 0.00032     |
+| Count (Left, 0–5)  | +1.65     | 4.62      | 0.00019     |
+| Count (Right, 0–5) | +1.35     | 2.98      | 0.0073      |
+
+### Table 2. Results of the user satisfaction survey.
+Participants reported high satisfaction with the clarity and intuitiveness of the AI feedback.  
+All users (100%) were able to identify posture mistakes through the system, and 95% found the feedback easy to understand.  
+Additional comments suggested improvements such as real-time guidance, voice instructions, and more detailed correction prompts.
+
+| Question                                                                                     | Yes        | No         |
+|----------------------------------------------------------------------------------------------|------------|------------|
+| Were you able to identify which part of your exercise posture was incorrect after receiving AI feedback? | 20 (100%)  | 0 (0%)     |
+| Was the feedback provided by the AI system objective and easy to understand?                 | 19 (95%)   | 1 (5%)     |
+
 ## Requirements
 
 Essential libraries for running the project
@@ -169,14 +197,14 @@ pip install -r requirements.txt
 
 Installing the ViTPose library
 ```bash
-# mmcv 설치
+# mmcv Install
 git clone https://github.com/open-mmlab/mmcv.git
 cd mmcv
 git checkout v1.3.9
 MMCV_WITH_OPS=1 pip install -e .
 cd ..
 
-# ViTPose 설치
+# ViTPose Install
 git clone https://github.com/ViTAE-Transformer/ViTPose.git
 cd ViTPose
 pip install -v -e .
