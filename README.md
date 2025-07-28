@@ -187,10 +187,14 @@ Participants reported high satisfaction with the clarity and intuitiveness of th
 All users (100%) were able to identify posture mistakes through the system, and 95% found the feedback easy to understand.  
 Additional comments suggested improvements such as real-time guidance, voice instructions, and more detailed correction prompts.
 
+<div align="center">
+
 | Question                                                                                     | Yes        | No         |
 |----------------------------------------------------------------------------------------------|------------|------------|
 | Were you able to identify which part of your exercise posture was incorrect after receiving AI feedback? | 20 (100%)  | 0 (0%)     |
 | Was the feedback provided by the AI system objective and easy to understand?                 | 19 (95%)   | 1 (5%)     |
+
+</div>
 
 ## Requirements
 
