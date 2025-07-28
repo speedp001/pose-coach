@@ -162,21 +162,25 @@ This method allows even users without specialized knowledge to quickly recognize
 <br></br>
 
 ## User Test
-<img width="2489" height="1141" alt="Fig 3" src="https://github.com/user-attachments/assets/34016a71-a9c7-409d-b004-9106b35cf44d" />
+<img width="1000" height="440" alt="User Test Flow Diagrams" src="https://github.com/user-attachments/assets/04d6931b-689f-4324-8028-a0bba9cc0249" />
 The user study consisted of six sequential stages: initial instruction with a tutorial video, a pre-test without feedback, corrective feedback delivery, a post-test with feedback, additional refinement feedback, and a final questionnaire assessing feedback clarity, intuitiveness, and user satisfaction.
 
 ### Table 1. Effectiveness of AI-based feedback on exercise performance.
 The results below show a statistically significant improvement in accuracy, speed, and repetition count after receiving feedback from the proposed system.  
 Especially, the Δ Score and t-values confirm meaningful enhancements in all metrics.
 
+<div align="center">
+
 | Measure            | Δ Score ↑ | t-value ↑ | p-value ↓ |
-|--------------------|-----------|-----------|------------|
-| Accuracy (Left, %) | +8.62%    | 4.51      | 0.00024     |
-| Accuracy (Right, %)| +8.05%    | 3.15      | 0.00525     |
-| Speed (Left, %)    | +18.63%   | 3.93      | 0.00089     |
-| Speed (Right, %)   | +23.51%   | 4.38      | 0.00032     |
-| Count (Left, 0–5)  | +1.65     | 4.62      | 0.00019     |
-| Count (Right, 0–5) | +1.35     | 2.98      | 0.0073      |
+|:------------------:|:---------:|:---------:|:----------:|
+| Accuracy (Left, %) |  +8.62%   |   4.51    |  0.00024   |
+| Accuracy (Right, %)|  +8.05%   |   3.15    |  0.00525   |
+| Speed (Left, %)    | +18.63%   |   3.93    |  0.00089   |
+| Speed (Right, %)   | +23.51%   |   4.38    |  0.00032   |
+| Count (Left, 0–5)  |  +1.65    |   4.62    |  0.00019   |
+| Count (Right, 0–5) |  +1.35    |   2.98    |  0.0073    |
+
+</div>
 
 ### Table 2. Results of the user satisfaction survey.
 Participants reported high satisfaction with the clarity and intuitiveness of the AI feedback.  
