@@ -14,7 +14,7 @@ The system is implemented based on the `Diagonal Arm Lift` exercise but is struc
 <br></br>
 
 ## Paper
-AI-Based Pose Coach: Effectiveness Assessment and Feedback Through Diagonal Arm Lift Movements, submitted to [Conference Name]  
+AI-based Pose Coach: Enhancing Exercise Performance using Pose Estimation, submitted to ISMAR2025 Poster Paper
 <br></br>
 
 ## Index
